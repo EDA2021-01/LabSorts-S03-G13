@@ -88,7 +88,7 @@ def printResults(ord_books, sample=10):
         while i <= sample:
             book = lt.getElement(ord_books,i)
             print("Título: "+ book["title"] + " ISBN: " +
-                    book["isbn"] + " Rating: " + book["avarage_rating"])
+                    book["isbn"] + " Rating: " + book["average_rating"])
             i += 1   
 
 catalog = None
