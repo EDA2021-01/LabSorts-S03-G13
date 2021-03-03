@@ -1,26 +1,8 @@
-Datos de los estudiantes: 
-Estudiante 1: José Daniel Montero Gutiérrez (202012732): j.monterog@uniandes.edu.co 
-Estudiante 2: Jesed Alejandro Dominguez Piratova (202011992): j.dominguezp@uniandes.edu.co
+#ISIS1225 - Librerias de soporte
 
-#ISIS1225 - Estructura de un proyecto
+Este proyecto contiene los Tipos abstractos de datos, estructuras de datos y algoritmos requeridos por el curso ISIS1225-Estructuras de Datos y Algoritmos
 
-Este proyecto busca mostrar una posible forma de organizar el código que se va a desarrollar en los proyectos del curso.
-
-Esta organización es una sugerencia que puede ser adaptada a  las necesidades y gustos de cada persona.
-
-La estructura tiene los siguiente directorios y archivos:
-
--App
-
-Este directorio se utiliza para los archivos python desarrollados para responder a los retos del curso. Acá se pueden tener todos los archivos python que se necesiten
-
--Data
-Este directorio contiene los datos/archivos de prueba para cada uno de los retos
-
--Docs
-Este directorio tiene documentos anexos al proyecto donde se explican decisiones de diseño, análisis de algoritmos y en general información asociada al código desarrollado por cada grupo
-
--DiscLib
+-Lib
 Este directorio contiene todo el código de base que se entrega para el funcionamiento del curso.  Dentro de este directorio encuentran:
     
     |-- ADT:  Directorio con los Tipos Abstractos de Datos del curso
@@ -31,4 +13,6 @@ Este directorio contiene todo el código de base que se entrega para el funciona
 
     |-- Utils: Funciones auxiliares para el funcionamiento de los TADs y estructuras de datos
 
+-Test
+Este directorio contiene las pruebas realizadas a los TADs, Estructuras de Datos y Algoritmos.
 

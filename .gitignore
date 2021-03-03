@@ -14,7 +14,6 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
 lib64/
 parts/
 sdist/
@@ -104,12 +103,12 @@ celerybeat.pid
 # Environments
 .env
 .venv
-.vscode/
 env/
 venv/
 ENV/
 env.bak/
 venv.bak/
+.vscode/
 
 # Spyder project settings
 .spyderproject
@@ -129,13 +128,18 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+
+#Mac file system
+.DS_Store
+
+
 #Python Cache
-# #Data
+#Data
 *.csv
-!Data/GoodReads/books-small.csv
-!Data/GoodReads/book_tags-small.csv
-!Data/GoodReads/tags.csv
+!Data/GoodReads/books.csv
+!Data/GoodReads/book_reviews.csv
+!Data/books.csv
+!Data/category-id.csv
+!Data/videos-small.csv
 
 .vim
-
-.DS_Store

@@ -1,1 +1,1 @@
-En este directorio van los datos de prueba de los proyectos
+Utilizar los archivos de datos que se encuentran en Sicuaplus

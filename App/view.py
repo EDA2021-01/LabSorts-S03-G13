@@ -1,4 +1,4 @@
-"""
+﻿"""
  * Copyright 2020, Departamento de sistemas y Computación, Universidad
  * de Los Andes
  *
@@ -29,67 +29,36 @@ assert cf
 
 """
 La vista se encarga de la interacción con el usuario
-Presenta el menu de opciones  y  por cada seleccion
+Presenta el menu de opciones y por cada seleccion
 se hace la solicitud al controlador para ejecutar la
 operación solicitada
 """
 
-
 def printMenu():
     print("Bienvenido")
-    print("1- Cargar información en el catálogo")
-    print("2- Consultar los Top x libros por promedio")
-    print("3- Consultar los libros de un autor")
-    print("4- Libros por género")
-    print("5 - Ordenar los libros por rating")
-    print("0- Salir")
+    print("1- Cargar información en el catálogo en una lista encadenada o un arreglo")
+    print("2- Crear lista de los vídeos más vistos en un país y con categoría específica")
 
-
-def initCatalog():
+def initCatalog_Linked():
     """
     Inicializa el catalogo de libros
     """
-    return controller.initCatalog()
-
-
-def loadData(catalog):
+    return controller.initCatalogLinked()
+    
+def initCatalog_Array():
     """
-    Carga los libros en la estructura de datos
+    Inicializa el catalogo de libros
     """
-    controller.loadData(catalog)
+    return controller.initCatalogArray()
 
-
-def printAuthorData(author):
-    if author:
-        print('Autor encontrado: ' + author['name'])
-        print('Promedio: ' + str(author['average_rating']))
-        print('Total de libros: ' + str(lt.size(author['books'])))
-        for book in lt.iterator(author['books']):
-            print('Titulo: ' + book['title'] + '  ISBN: ' + book['isbn'])
-    else:
-        print('No se encontro el autor')
-
-
-def printBestBooks(books):
-    size = lt.size(books)
-    if size:
-        print(' Estos son los mejores libros: ')
-        for book in lt.iterator(books):
-            print('Titulo: ' + book['title'] + '  ISBN: ' +
-                  book['isbn'] + ' Rating: ' + book['average_rating'])
-    else:
-        print('No se encontraron libros')
-
-def printResults(ord_books, sample=10):
-    size = lt.size(ord_books)
+def printResults(videos, sample=3):
+    size = lt.size(videos)
     if size > sample:
-        print("Los primeros ", sample, "libros ordenados son:")
-        i = 0
-        while i <= sample:
-            book = lt.getElement(ord_books,i)
-            print("Título: "+ book["title"] + " ISBN: " +
-                    book["isbn"] + " Rating: " + book["average_rating"])
-            i += 1   
+        print("Los primeros ", sample, " videos ordenados son: ")
+
+def Load_Data(catalog):
+    #Carga los datos del archivo
+    controller.Load_Data(catalog)
 
 catalog = None
 
@@ -100,36 +69,36 @@ while True:
     printMenu()
     inputs = input('Seleccione una opción para continuar\n')
     if int(inputs[0]) == 1:
-        print("Cargando información de los archivos ....")
-        catalog = initCatalog()
-        loadData(catalog)
-        print('Libros cargados: ' + str(lt.size(catalog['books'])))
-        print('Autores cargados: ' + str(lt.size(catalog['authors'])))
-        print('Géneros cargados: ' + str(lt.size(catalog['tags'])))
-        print('Asociación de Géneros a Libros cargados: ' +
-              str(lt.size(catalog['book_tags'])))
-
+        selection = int(input("1 para SINGLE_LINKED o 2 para ARRAY_LIST:\n"))
+        if selection == 1:
+            catalog = initCatalog_Linked()
+            Load_Data(catalog)
+            print("Cargando información de los archivos ...")
+            print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+            print('Etiquetas cargadas: ' + str(lt.size(catalog['tagvideos'])))
+            print('Categorías cargadas: ' + str(lt.size(catalog['categories'])))
+        if selection == 2:
+            catalog = initCatalog_Array()
+            Load_Data(catalog)
+            print("Cargando información de los archivos ....")
+            print('Videos cargados: ' + str(lt.size(catalog['videos'])))
+            print('Etiquetas cargadas: ' + str(lt.size(catalog['tagvideos'])))
+            print('Categorías cargadas: ' + str(lt.size(catalog['categories'])))
+            print(catalog['categories'])
+            
     elif int(inputs[0]) == 2:
-        number = input("Buscando los TOP ?: ")
-        books = controller.getBestBooks(catalog, int(number))
-        printBestBooks(books)
+        size = int(input("¿Cuántos vídeos desea enlistar?\n"))
+        # country = str(input("Digite el nombre del país: \n"))
+        # category_videos = str(input("Digite la categoría: \n"))
+        if size > lt.size(catalog['videos']):
+            print('La cantidad de videos a enlistar es mayor a la cantidad de videos disponibles.')
+        else:
+            print("1 - Selection Sort \n2 - Insertion Sort \n3 - Shell Sort \n4 - Merge Sort \n5 - Quick Sort \n")
+            sortType = input("Seleccione el tipo de algoritmo de ordenamiento que desea usar: ")
+            result = controller.sortVideos(catalog, int(size), sortType)
+            print("Usando una muestra de ", size, " elementos, el tiempo que tomó ordenar el catálogo (en milisegundos) es ", str(result[0]))
+            
 
-    elif int(inputs[0]) == 3:
-        authorname = input("Nombre del autor a buscar: ")
-        author = controller.getBooksByAuthor(catalog, authorname)
-        printAuthorData(author)
-
-    elif int(inputs[0]) == 4:
-        label = input("Etiqueta a buscar: ")
-        book_count = controller.countBooksByTag(catalog, label)
-        print('Se encontraron: ', book_count, ' Libros')
-#commit prueba
-    elif int(inputs[0]) == 5:
-        size = input("Indique tamaño de la muestra: ")
-        result = controller.sortBooks(catalog, int(size))
-        print("Para la muestra de", size, " elementos, el tiempo (mseg) es: ",
-                                          str(result[0]))
-        printResults(result[1])
 
     else:
         sys.exit(0)
